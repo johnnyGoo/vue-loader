@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>VueLoader</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<style>
+    .btn {
+        width: 40%;
+        height: 200px;
+        background: #2b81af;
+        color: #fff;
+        line-height: 200px;
+        text-align: center;
+        float: left;
+        margin-left: 20px;
+    }
+
+    .btn:hover {
+        background: #006600;
+        color: #fff;
+    }
+
+    .banner {
+        color: #fff;
+        background: #000;
+        position: relative;
+    }
+
+    /*.banner:nth-child(3n) {*/
+    /*background: skyblue;*/
+    /*}*/
+
+    /*.banner:nth-child(3n+1) {*/
+    /*background: rosybrown;*/
+    /*}*/
+
+    /*.banner:nth-child(3n+2) {*/
+    /*background: yellowgreen;*/
+    /*}*/
+
+    .title {
+
+        font-size: 30px;
+        text-align: left;
+        margin-top: 20px;
+        z-index: 10;
+        position: relative;
+        margin-left: 20px;
+    }
+
+    .content {
+
+        font-size: 14px;
+        text-align: left;
+        margin-top: 5px;
+        z-index: 10;
+        position: relative;
+        margin-left: 20px;
+    }
+
+    .blue {
+        color: #0086b3;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    body, html {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+        font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+
+    }
+
+    [v-show] {
+        display: none;
+    }
+
+    .full {
+        width: 100%;
+        height: 100%;
+    }
+
+    .lt_0 {
+        left: 0px;
+        top: 0px;
+        position: absolute;
+    }
+
+    /*.blur {*/
+    /*-webkit-filter: blur(10px); !* Chrome, Opera *!*/
+    /*-moz-filter: blur(10px);*/
+    /*-ms-filter: blur(10px);*/
+    /*filter: blur(10px);*/
+
+    /*filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); !* IE6~IE9 *!*/
+    /*}*/
+
+    .loader {
+        position: absolute;
+        z-index: 100;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+    }
+
+</style>
+<body>
+
+
+<div id="example" class="full">
+
+    <swiper v-show="true" style="width: 100%;height: 100%;" id="swiper_horizontal"
+            :pagination-visible="true" :transition-time="0.45" :page.sync="page"
+            :autoplay='0' :loop="false" :autoplay-disable-on-interaction="true"
+            :autoplay-stop-on-last="false"
+            direction="vertical" :resistance-ratio="0.2" :pagination-clickable="true" :only-external="false"
+            :allow-swipe-to-next="true" :allow-swipe-to-prev="true">
+        <div class="banner">
+
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1.1,'transition-delay': '0.2s'}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.6,y:100}"
+                    v-show="page" class="lt_0"
+                    style="background: url(img/1.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s'}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.1,y:100}"
+                    v-show="page==1" class="title ">
+                布加迪威龙
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:20}"
+                    v-show="page==1" class="content ">
+                Bugatti Veyron中国市场登记命名为布加迪威航。
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.8s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:20}"
+                    v-show="page==1" class="content ">
+                布加迪汽车的创始人埃托尔·布加迪
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '1.2s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:20}"
+                    v-show="page==1" class="content ">
+                <dynamic-animation type="animation"
+                                   :keyframes="{'0%': {opacity: 1},'100%': {opacity: .2}}"
+                                   :animation=" { 'animation-duration': '1s', 'animation-timing-function': 'cubic-bezier(0.36,0.07,0.19,0.97)','animation-iteration-count': 'infinite','animation-direction':'alternate'}"
+                                   v-show="page">
+                    呼吸动画
+                </dynamic-animation>
+                <dynamic-animation type="animation"
+                                   :keyframes="{'0%': {opacity: 1},'100%': {opacity: .2}}"
+                                   :animation=" { 'animation-duration': '1.5s', 'animation-timing-function': 'cubic-bezier(0.36,0.07,0.19,0.97)','animation-iteration-count': 'infinite','animation-direction':'alternate'}"
+                                   v-show="page">
+                    呼吸动画2
+                </dynamic-animation>
+                <dynamic-animation type="animation"
+                                   :keyframes="{'0%': {opacity: 1},'100%': {opacity: .2}}"
+                                   :animation=" { 'animation-duration': '2s', 'animation-timing-function': 'cubic-bezier(0.36,0.07,0.19,0.97)','animation-iteration-count': 'infinite','animation-direction':'alternate'}"
+                                   v-show="page">
+                    呼吸动画3
+                </dynamic-animation>
+            </dynamic-animation>
+
+
+        </div>
+        <div class="banner">
+            <dynamic-animation
+                    :normal="{transition:'all 1.5s ease',opacity:1,scale:1.2,x:0,'transition-delay': '.1s'}"
+                    v-show="page" class="lt_0"
+                    style="background: url(img/2.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+
+            <dynamic-animation
+                    :normal="{transition:'all 1.5s ease',opacity:1,scale:1,x:0,'transition-delay': '.1s'}"
+                    :enter="{transition:'all 0.2s ease','transition-delay': '.2s',x:0,opacity:1,scale:1.2}"
+                    v-show="page==2" class="lt_0"
+                    style="background: url(img/2.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.4s'}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.1,y:-100}"
+                    v-show="page==2" class="title ">
+                布加迪威龙
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:20}"
+                    v-show="page==2" class="content ">
+                Bugatti Veyron中国市场登记命名为布加迪威航。
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.8s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:20}"
+                    v-show="page==2" class="content ">
+                布加迪汽车的创始人埃托尔·布加迪
+            </dynamic-animation>
+
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:-20}"
+                    v-show="page==2" class="content ">
+                <dynamic-animation v-for="id in 20" type="animation"
+                                   :keyframes="{'0%': {x: 0,y:0,opacity:0,scale:0.2},'60%': {x: -10,y:80,opacity:1,scale:Math.random()*2},'100%': {x: -14,y:Math.random()*40+120,opacity:0,scale:Math.random()*2}}"
+                                   :animation=" {'animation-delay': Math.random()+'s','animation-duration': '1s', 'animation-timing-function': 'cubic-bezier(.36,.32,.63,.76)','animation-iteration-count': 'infinite','animation-direction':''}"
+                                   :style="{position:'absolute',left:Math.random()*400+'px',top:Math.random()*300+'px',width:'10px',height: '10px',background: '#fff','border-radius': '5px'}">
+
+                </dynamic-animation>
+            </dynamic-animation>
+
+
+        </div>
+        <div class="banner">
+            <dynamic-animation
+                    :normal="{transition:'all 1.5s ease',opacity:1,scale:1.01,x:0,'transition-delay': '.1s'}"
+                    v-show="page" class="lt_0"
+                    style="background: url(img/3.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+
+
+            <dynamic-animation
+                    :normal="{transition:'all 1.5s ease',scaleX:1.2,scaleY:1.2,x:1,'transition-delay': '.1s'}"
+                    :enter="{'transition-delay': '.2s',x:0,scale:1.01}"
+                    :leave="{'transition-delay': '.2s',x:0,scale:1.01}"
+                    v-show="page==3" class="lt_0"
+                    style="background: url(img/3.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s'}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.1,x:100}"
+                    v-show="page==3" class="title ">
+                布加迪威龙
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,x:20}"
+                    v-show="page==3" class="content ">
+                Bugatti Veyron中国市场登记命名为布加迪威航。
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.8s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,x:20}"
+                    v-show="page==3" class="content ">
+                布加迪汽车的创始人埃托尔·布加迪
+            </dynamic-animation>
+
+        </div>
+        <div class="banner">
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s',y:0}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.6,y:100}"
+                    v-show="page" class="lt_0"
+                    style="background: url(img/4.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s'}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.3,y:0}"
+                    v-show="page==4" class="title ">
+                北极熊
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1.1,y:20}"
+                    v-show="page==4" class="content ">
+                是世界上最大的陆地食肉动物，又名白熊，憨态可掬。
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.8s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1.1,y:20}"
+                    v-show="page==4" class="content ">
+                在冬季来临前脂肪将大量积累，它们的体重可达650公斤。
+            </dynamic-animation>
+
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:-10}"
+                    v-show="page==4" class="content "
+                    style="position: absolute;top:0px;left: 0px;width: 100%;height: 100%;margin-left: 0;margin-top: -100px">
+                <dynamic-animation v-for="id in 20" type="animation"
+                                   :keyframes="{'0%': {x: 0,y:0,opacity:0,scale:0.2},'60%': {x: -40,y:150,opacity:1,scale:Math.random()*2},'100%': {x: -74,y:Math.random()*40+220,opacity:0,scale:Math.random()*2}}"
+                                   :animation=" {'animation-delay': Math.random()+'s','animation-duration': '1s', 'animation-timing-function': 'cubic-bezier(.36,.32,.63,.76)','animation-iteration-count': 'infinite','animation-direction':''}"
+                                   :style="{position:'absolute',left:(Math.random()*100)+'%',top:(Math.random()*100)+'%',width:'10px',height: '10px',background: '#fff','border-radius': '5px'}">
+
+                </dynamic-animation>
+            </dynamic-animation>
+
+
+        </div>
+        <div class="banner">
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s',y:0}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.6,y:100}"
+                    v-show="page" class="lt_0"
+                    style="background: url(img/5.jpg);width: 100%;height: 100%;background-size: cover;background-position: center"></dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s'}"
+                    :enter="{'transition-delay': '.2s',opacity:1,scale:1.1,rotate:-50}"
+                    v-show="page==5" class="title blue">
+                北极熊
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.5s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,rotate:-50}"
+                    v-show="page==5" class="content blue">
+                是世界上最大的陆地食肉动物，又名白熊，憨态可掬。
+            </dynamic-animation>
+            <dynamic-animation
+                    :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.8s'}"
+                    :enter="{'transition-delay': '.2s',opacity:0,scale:1,rotate:-50}"
+                    v-show="page==5" class="content blue">
+                在冬季来临前脂肪将大量积累，它们的体重可达650公斤。
+            </dynamic-animation>
+        </div>
+    </swiper>
+
+</div>
+<vue-loader class="loader" :min-duration="3000" v-show="false==loading.complete" :assets.sync="loading.assets"
+            @loading-progress="loadingProgress" @loading-complete="loadingComplete" style="color:#fff"
+            :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.5s'}">
+    <dynamic-animation
+            :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.2s'}"
+            :enter="{'transition-delay': '.2s',opacity:0,scale:1,rotate:180}"
+            v-show="false==loading.complete"
+            style="position:relative;text-align: center;margin-top: 250px;width: 100%;">
+
+        <embed style="" src="img/ring.svg" width="300" height="100"
+               type="image/svg+xml"
+               pluginspage="http://www.adobe.com/svg/viewer/install/"/>
+        <div style="position: absolute;top:40px;left: 0px;text-align: center;width: 100%">{{loading.percent}}%</div>
+    </dynamic-animation>
+</vue-loader>
+<script src="dist/vue.min.js"></script>
+<script src="dist/smart.min.js"></script>
+<script src="dist/vue-swiper.js"></script>
+<script src="dist/vue-dynamic-animation.js"></script>
+<script src="dist/vue-loader.js"></script>
+
+<script>
+
+    Smart.Css.createSmartCssStyle('.blur', {filter: 'blur(0px);'});
+    // Smart.Css.smartCss(document.querySelector('.blur'),{filter:'blur(10px);',width:'100%'});
+    new Vue({
+        el: 'body',
+        components: {
+            Swiper: VueSwiper, DynamicAnimation: VueDynamicAnimation, VueLoader: VueLoader
+        },
+        data: {
+            page: 1, show: false, loading: {
+                assets: ['img/1.jpg'],
+                percent: 0, complete: false
+            }
+        },
+        methods: {
+            loadingProgress: function (p) {
+                this.loading.percent = parseInt(p.percent * 100);
+            }, loadingComplete: function () {
+                this.loading.percent = 100;
+                  this.loading.complete = true;
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>
