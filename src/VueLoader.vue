@@ -50,7 +50,7 @@
                 default: null
             }, minDuration: {
                 type: Number,
-                default: 1000
+                default: 500
             }
         },
         data: function () {
