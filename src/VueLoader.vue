@@ -76,28 +76,52 @@
                 me.startTime = new Date().getTime();
 
                 me.loader = new Loader();
-                me.loader.addImages(me.assets);
+
+                var assets;
+                if(Smart.Utils.isArray(me.assets)){
+                    assets=(me.assets);
+                }else{
+                    assets=(me.loader.checkAllImages(me.assets));
+                  //  console.log(me.loader.checkAllImages(me.assets))
+                }
+                me.loader.addImages(assets);
+               // console.log(assets);
                 me.$emit('loading-start');
                 //监听资源加载进度事件
                 me.loader.addProgressListener(function (p) {
                     me.$emit('loading-progress', {
                         completedCount: p.completedCount,
                         percent: Math.min(p.completedCount / p.totalCount, me.maxPercent()),
-                        totalCount: p.totalCount
+                        totalCount: p.totalCount,
+                        img:p.img
                     });
                 });
-                //监听资源加载完成事件
-                me.loader.addCompletionListener(function () {
+                
+                
+                function realloaded() {
                     me.iv = setInterval(function () {
                         me.$emit('loading-progress', {percent: me.maxPercent()});
                         if (me.maxPercent() >= 1) {
                             me.loadingComplete()
                         }
                     }, 30);
-                    //显示图片
-                });
+                }
+
+
+                //监听资源加载完成事件
+                me.loader.addCompletionListener(realloaded);
                 //启动资源加载管理器
                 me.loader.start();
+                if(assets.length<=0){
+                  //  realloaded()
+                  _.delay(realloaded,10);
+                }
+
+
+
+
+
+
             }
         },
         computed: {

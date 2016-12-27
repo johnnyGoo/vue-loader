@@ -147,6 +147,8 @@
                     :enter="{'transition-delay': '.2s',opacity:0,scale:1,y:20}"
                     v-show="page==1" class="content ">
                 Bugatti Veyron中国市场登记命名为布加迪威航。
+                <img link="img/1.jpg">
+                <img link="img/2.jpg">
             </dynamic-animation>
             <dynamic-animation
                     :normal="{transition:'all 0.5s ease',opacity:1,scale:1,'transition-delay': '0.8s'}"
@@ -298,6 +300,8 @@
             </dynamic-animation>
 
 
+
+
         </div>
         <div class="banner">
             <dynamic-animation
@@ -359,7 +363,7 @@
         },
         data: {
             page: 1, show: false, loading: {
-                assets: ['body'],
+                assets:'body',
                 percent: 0, complete: false
             }
         },
@@ -370,6 +374,10 @@
             }, loadingComplete: function () {
                 this.loading.percent = 100;
                   this.loading.complete = true;
+
+                var loader=new Smart.Loader()
+                loader.displayImages('body')
+
             }
         }
     })
