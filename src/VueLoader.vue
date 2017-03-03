@@ -75,7 +75,7 @@
                 var me = this;
                 me.startTime = new Date().getTime();
 
-                me.loader = new Loader();
+
 
                 var assets;
                 if(Smart.Utils.isArray(me.assets)){
@@ -128,8 +128,20 @@
 
         },
 
+        init: function () {
+            var me=this,assets;
+            me.loader = new Loader();
+            if(Smart.Utils.isArray(me.assets)){
+                assets=(me.assets);
+            }else{
+                assets=(me.loader.checkAllImages(me.assets));
+                //  console.log(me.loader.checkAllImages(me.assets))
+            }
+            me.assets=assets;
+//            console.log(assets)
+        },
 
-        ready: function () {
+        beforeCompile: function () {
             if (_.isEqual({}, this.enter) && _.isEqual({}, this.leave)) {
                 Css.smartCss(this.$el, this.normal, 'px');
                 return;
